@@ -3,7 +3,6 @@
 namespace MGVO;
 
 use JetBrains\PhpStorm\ArrayShape;
-use SimpleXMLElement;
 
 const MGVO_DEBUG_ERR      = 0b1;         // Allg. Fehlerausgaben
 const MGVO_DEBUG_DATA     = 0b10;        // XML-Ergebnis vom Aufruf
@@ -136,7 +135,7 @@ class MgvoAPI
      * @param   array   $paras    Die übergebenen Queryparameter als array
      * @param   string  $objname  Der Name der auszugebenden Tabelle
      *
-     * @return false|SimpleXMLElement
+     * @return array
      */
     #[ArrayShape(
         [
@@ -145,7 +144,7 @@ class MgvoAPI
             'version'  => "string",
             'objar'    => "array"]
     )]
-    private function xml2table(string $url, array $paras, string $objname): false|array
+    private function xml2table(string $url, array $paras, string $objname): array
     {
         $xml = simplexml_load_string($this->httpGetCached($url, $paras));
         $this->log("Aus XML erzeugtes SimpleXMLElement", $xml, MGVO_DEBUG_XML);
