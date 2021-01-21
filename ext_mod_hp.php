@@ -99,7 +99,7 @@ class MgvoAPI
      *
      * @return false|string returned einen XML String oder false, falls es einen error gab
      */
-    private function httpGetCached(string $url, array $paras): false|string
+    private function httpGetCached(string $url, array $paras): false | string
     {
         $filename   = pathinfo(parse_url($url)['path'], PATHINFO_FILENAME);
         $parasquery = http_build_query($paras);
@@ -111,10 +111,12 @@ class MgvoAPI
             file_get_contents("$this->urlroot/$url?$parasquery");
 
         // Prüfen, ob der Aufruf erfolgreich war
-        if (empty($ret) ||
+        if (
+            empty($ret) ||
             str_contains($ret, "Nicht erlaubt!") ||
             str_contains($ret, "Sicherheitsversto") ||
-           !str_contains($ret, "DOCTYPE xml")) {
+            !str_contains($ret, "DOCTYPE xml")
+        ) {
             $this->log("XML nicht korrekt geladen", $ret, MGVO_DEBUG_ERR);
             return false;
         }
