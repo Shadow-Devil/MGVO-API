@@ -306,7 +306,7 @@ class GenericMgvoSniplet extends MgvoSniplet
             return "Anzahl der Felder und Überschriften in mgvo_sniplet_vkal_entry() nicht gleich";
         }
         if (empty($vkal_rewrite_fields)) { // Überschreiben von Feldern
-            $vkal_rewrite_fields = array('starzeit' => 'resstime', 'endzeit' => 'resetime', 'startdat' => 'ressdat');
+            $vkal_rewrite_fields = ['starzeit' => 'resstime', 'endzeit' => 'resetime', 'startdat' => 'ressdat'];
         }
 
         $sanitize_fields_table = explode(",", "startdat,startzeit,enddat,endzeit");
