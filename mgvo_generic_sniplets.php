@@ -52,8 +52,8 @@ class GenericMgvoSniplet extends MgvoSniplet
     public function generateGruppenSniplet(
         array $use_fields_table = ["grubez", "grutxt", "startzeit", "endzeit", "turnus", "ortid", "tridall"],
         array $head_fields_table = ["Gruppenname", "Beschreibung", "Start", "Ende", "Turnus", "Ort", "Trainer"],
-        string|array $sort = null,
-        string|array $filter = null,
+        string | array $sort = null,
+        string | array $filter = null,
         $rewrite_fields = null,
         int $max_count = 0,
         int $page = 0
@@ -108,8 +108,8 @@ class GenericMgvoSniplet extends MgvoSniplet
         int $seljahr,
         array $vkal_use_fields_table = ["startdat", "startzeit", "bez", "ort"],
         array $vkal_head_fields_table = ["Datum", "Start", "Veranstaltungen", "ort"],
-        string|array $vkal_sort = null,
-        string|array $vkal_filter = null,
+        string | array $vkal_sort = null,
+        string | array $vkal_filter = null,
         array $vkal_rewrite_fields = null,
         int $max_count = 0,
         int $page = 0
@@ -163,8 +163,8 @@ class GenericMgvoSniplet extends MgvoSniplet
         array $head_fields_table,
         array $sanitize_fields_table,
         array $rewrite,
-        string|array|null $sort,
-        string|array $filter,
+        string | array | null $sort,
+        string | array $filter,
         int $max_count,
         int $page
     ): string {
@@ -227,13 +227,16 @@ class GenericMgvoSniplet extends MgvoSniplet
                 }
             }
 
-            if ($count !== 0 &&  // keine Anzahl angegeben
-              (
-                  !($count > $max_count && $page === 0)
+            if (
+                $count !== 0
+                &&  // keine Anzahl angegeben
+                (
+                  !($count > $max_count
+                  && $page === 0)
                 // keine Seite angeben, aktuelle Anzahl größer Max_Count
-                || !(($count * $page <= $max_count) &&
-                  !(($count * ($page + 1)) <= $max_count))  // nicht auf der aktuellen Seite
-              )
+                || !(($count * $page <= $max_count)
+                  && !(($count * ($page + 1)) <= $max_count))  // nicht auf der aktuellen Seite
+                )
             ) {
                 $count++;
                 continue;

@@ -36,7 +36,7 @@ function localecho($ipadr, $out, $t = 0)
  *
  * @return mixed
  */
-function saveassign(array $arr, string $idx, array|string $initval): mixed
+function saveassign(array $arr, string $idx, array | string $initval): mixed
 {
     if (isset($arr[$idx])) {
         return $arr[$idx];
@@ -52,7 +52,7 @@ function saveassign(array $arr, string $idx, array|string $initval): mixed
  *
  * @return array|null
  */
-function prep_ar(array|null $ar): array|null
+function prep_ar(?array $ar): array | null
 {
     if ($ar === null) {
         return null;
@@ -88,7 +88,7 @@ function print_ar(array $ar)
  *
  * @return false|string the result or false on error
  */
-function http_get1(string $url, $auth = ""): false|string
+function http_get1(string $url, $auth = ""): false | string
 {
     global $glob_debug, $glob_curlerror_no, $glob_curlerror_msg;
     if ($glob_debug) {
@@ -144,7 +144,7 @@ function http_get1(string $url, $auth = ""): false|string
  *
  * @return false|string the result or false on error
  */
-function http_post(string $url, $vars = null, $auth = "", $optar = []): false|string
+function http_post(string $url, $vars = null, $auth = "", $optar = []): false | string
 {
     global $glob_curlerror_no, $glob_curlerror_msg, $glob_debug;
     if ($glob_debug) {

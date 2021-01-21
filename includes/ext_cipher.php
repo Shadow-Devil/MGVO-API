@@ -67,7 +67,7 @@ class Cipher
      *
      * @return false|string
      */
-    public function decrypt(string $input, $binarymode = false, $nobase64 = false): false|string
+    public function decrypt(string $input, $binarymode = false, $nobase64 = false): false | string
     {
         if (!$nobase64) {
             $input = base64_decode($input);

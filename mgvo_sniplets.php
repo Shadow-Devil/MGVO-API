@@ -297,7 +297,7 @@ class MgvoSniplet
         return $sniplet;
     }
 
-    public function listDocumentsSniplet($dokart = null): string
+    public function listDocumentsSniplet(?string $dokart = null): string
     {
         $resar   = $this->api->listDocuments($dokart);
         $sniplet = "<div class='mgvo mgvo-documents'>";

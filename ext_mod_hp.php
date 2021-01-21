@@ -399,7 +399,7 @@ class MgvoAPI
         'verein'   => "string",
         'version'  => "string",
         'objar'    => "array"])]
-    public function listDocuments($dokart = null): array
+    public function listDocuments(?string $dokart = null): array
     {
         $this->cacheon = 1;
         $paras         = [
