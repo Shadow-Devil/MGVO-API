@@ -2,8 +2,6 @@
 
 namespace MGVO;
 
-use JetBrains\PhpStorm\ArrayShape;
-
 const MGVO_DEBUG_ERR      = 0b1;         // Allg. Fehlerausgaben
 const MGVO_DEBUG_DATA     = 0b10;        // XML-Ergebnis vom Aufruf
 const MGVO_DEBUG_XML      = 0b100;         // Array nach XML-Konvertierung
@@ -70,10 +68,10 @@ class MgvoAPI
      * @param   mixed   $lv
      * @param   int     $dtyp     Debugtype
      */
-    private function log(string $comment, mixed $lv, int $dtyp)
+    private function log(string $comment, $lv, int $dtyp)
     {
 
-        if ($dtyp && $this->debuglevel == 0) {
+        if (($dtyp & $this->debuglevel) == 0) {
             return;
         }
 
@@ -139,20 +137,20 @@ class MgvoAPI
      *
      * @return array
      */
-    #[ArrayShape(
-        [
-            'headline' => "string",
-            'verein'   => "string",
-            'version'  => "string",
-            'objar'    => "array"]
-    )]
+//    #[ArrayShape(
+//        [
+//            'headline' => "string",
+//            'verein'   => "string",
+//            'version'  => "string",
+//            'objar'    => "array"]
+//    )]
     private function xml2table(string $url, array $paras, string $objname): array
     {
         $xml = simplexml_load_string($this->httpGetCached($url, $paras));
         $this->log("Aus XML erzeugtes SimpleXMLElement", $xml, MGVO_DEBUG_XML);
 
         $objfieldlist = $xml->objfieldlist ?? "";//liste aller keys, die das object(array) haben sollte
-        $xmlObj       = $xml->{$objname} ?? null;
+        $xmlObj       = $xml->{$objname} ?? [];
 
         $fieldnames = explode(",", $objfieldlist);
         $resArr     = [];
@@ -181,11 +179,11 @@ class MgvoAPI
      *
      * @return array
      */
-    #[ArrayShape([
-        'headline' => "string",
-        'verein'   => "string",
-        'version'  => "string",
-        'objar'    => "array"])]
+//    #[ArrayShape([
+//        'headline' => "string",
+//        'verein'   => "string",
+//        'version'  => "string",
+//        'objar'    => "array"])]
     public function readVkal(int $vkalnr, int $seljahr): array
     {
         $this->cacheon = 1;
@@ -202,11 +200,11 @@ class MgvoAPI
      *
      * @return array
      */
-    #[ArrayShape([
-        'headline' => "string",
-        'verein'   => "string",
-        'version'  => "string",
-        'objar'    => "array"])]
+//    #[ArrayShape([
+//        'headline' => "string",
+//        'verein'   => "string",
+//        'version'  => "string",
+//        'objar'    => "array"])]
     public function readOrte(): array
     {
         $this->cacheon = 1;
@@ -220,11 +218,11 @@ class MgvoAPI
      *
      * @return array
      */
-    #[ArrayShape([
-        'headline' => "string",
-        'verein'   => "string",
-        'version'  => "string",
-        'objar'    => "array"])]
+//    #[ArrayShape([
+//        'headline' => "string",
+//        'verein'   => "string",
+//        'version'  => "string",
+//        'objar'    => "array"])]
     public function readBetreuer(): array
     {
         $this->cacheon = 1;
@@ -238,11 +236,11 @@ class MgvoAPI
      *
      * @return array
      */
-    #[ArrayShape([
-        'headline' => "string",
-        'verein'   => "string",
-        'version'  => "string",
-        'objar'    => "array"])]
+//    #[ArrayShape([
+//        'headline' => "string",
+//        'verein'   => "string",
+//        'version'  => "string",
+//        'objar'    => "array"])]
     public function readEvents(): array
     {
         $this->cacheon = 1;
@@ -256,11 +254,11 @@ class MgvoAPI
      *
      * @return array
      */
-    #[ArrayShape([
-        'headline' => "string",
-        'verein'   => "string",
-        'version'  => "string",
-        'objar'    => "array"])]
+//    #[ArrayShape([
+//        'headline' => "string",
+//        'verein'   => "string",
+//        'version'  => "string",
+//        'objar'    => "array"])]
     public function readGruppen(): array
     {
         $this->cacheon = 1;
@@ -274,11 +272,11 @@ class MgvoAPI
      *
      * @return array
      */
-    #[ArrayShape([
-        'headline' => "string",
-        'verein'   => "string",
-        'version'  => "string",
-        'objar'    => "array"])]
+//    #[ArrayShape([
+//        'headline' => "string",
+//        'verein'   => "string",
+//        'version'  => "string",
+//        'objar'    => "array"])]
     public function readAbt(): array
     {
         $this->cacheon = 1;
@@ -292,11 +290,11 @@ class MgvoAPI
      *
      * @return array
      */
-    #[ArrayShape([
-        'headline' => "string",
-        'verein'   => "string",
-        'version'  => "string",
-        'objar'    => "array"])]
+//    #[ArrayShape([
+//        'headline' => "string",
+//        'verein'   => "string",
+//        'version'  => "string",
+//        'objar'    => "array"])]
     public function readTrainingFail(): array
     {
         $this->cacheon = 1;
@@ -327,11 +325,11 @@ class MgvoAPI
      *
      * @return array
      */
-    #[ArrayShape([
-        'headline' => "string",
-        'verein'   => "string",
-        'version'  => "string",
-        'objar'    => "array"])]
+//    #[ArrayShape([
+//        'headline' => "string",
+//        'verein'   => "string",
+//        'version'  => "string",
+//        'objar'    => "array"])]
     public function readMitglieder(array $selparar): array
     {
         $cipher = new Cipher($this->vcryptkey);                         // Initialisierung der Verschlüsselung
@@ -365,11 +363,11 @@ class MgvoAPI
      *
      * @return array
      */
-    #[ArrayShape([
-        'headline' => "string",
-        'verein'   => "string",
-        'version'  => "string",
-        'objar'    => "array"])]
+//    #[ArrayShape([
+//        'headline' => "string",
+//        'verein'   => "string",
+//        'version'  => "string",
+//        'objar'    => "array"])]
     public function getMitpict(int $mgnr): array
     {
         $cipher = new Cipher($this->vcryptkey);                         // Initialisierung der Verschlüsselung
@@ -396,11 +394,11 @@ class MgvoAPI
      *
      * @return array
      */
-    #[ArrayShape([
-        'headline' => "string",
-        'verein'   => "string",
-        'version'  => "string",
-        'objar'    => "array"])]
+//    #[ArrayShape([
+//        'headline' => "string",
+//        'verein'   => "string",
+//        'version'  => "string",
+//        'objar'    => "array"])]
     public function listDocuments(?string $dokart = null): array
     {
         $this->cacheon = 1;
