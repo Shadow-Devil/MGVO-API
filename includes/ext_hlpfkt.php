@@ -1,9 +1,5 @@
 <?php
 
-namespace MGVO;
-
-use JetBrains\PhpStorm\Pure;
-
 // Hilfsfunktionen
 /**
  * @param        $ipadr
@@ -192,13 +188,13 @@ function http_post(string $url, $vars = null, $auth = "", $optar = []): false | 
     return $result;
 }
 
-#[Pure]
+//#[Pure]
 function calc_fingerprint(string $pis): string
 {
     return hash("sha256", $_SERVER['HTTP_USER_AGENT'] . $_SERVER['HTTP_ACCEPT'] . $pis);
 }
 
-#[Pure]
+//#[Pure]
 function date2user(string $db_datum, int $typ = 1): string
 {
     if ($db_datum == "" || $db_datum == "0000-00-00" || strlen($db_datum) < 4) {
@@ -245,7 +241,7 @@ function time2user(string $time): string
     return $usertime;
 }
 
-#[Pure]
+//#[Pure]
 function emptyval(mixed $fval): bool
 {
     return empty($fval) ||
