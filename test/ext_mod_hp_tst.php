@@ -18,23 +18,27 @@ echo "<html lang='de'><body>";
 $hp1 = new MgvoAPI($call_id, $vcryptkey, 0);
 $hp1->setDebuglevel(MGVO_DEBUG_ERR | MGVO_DEBUG_DATA | MGVO_DEBUG_XML);
 
-$inar = [
-  "nachname"    => "Madaller-Ldenscheid",
-  "vorname"     => "Justin-Kevin",
-  "zahlweise"   => "j",
-  "zahlungsart" => "l",
-  "anrede"      => 1,
-  "geschlecht"  => "m",
-  "ort"         => "Berlin",
-  "plz"         => 10365000,
-  "str"         => "Gernotstr. 12",
-  "notiz"       => "Ganz netter Kerl\nmanchmal besoffen"];
+//$inar = [
+//  "nachname"    => "Madaller-Ldenscheid",
+//  "vorname"     => "Justin-Kevin",
+//  "zahlweise"   => "j",
+//  "zahlungsart" => "l",
+//  "anrede"      => 1,
+//  "geschlecht"  => "m",
+//  "ort"         => "Berlin",
+//  "plz"         => 10365000,
+//  "str"         => "Gernotstr. 12",
+//  "notiz"       => "Ganz netter Kerl\nmanchmal besoffen"];
 
-$retar = $hp1->createMitstamm($inar);
-if ($retar['errno'] == 0) {
-    echo "Mitglied $retar[msg] angelegt<br>";
-} else {
-    echo "Fehler $retar[errno]: $retar[msg]<br>";
-}
+//$retar = $hp1->createMitstamm($inar);
+$retar = $hp1->readMitglieder(["suchbeg" => "geschlecht_lt=männlich"]);
+//zfld02
+//zfld01=Mayer
+//if ($retar['errno'] == 0) {
+print_ar($retar);
+    //echo "Mitglied $retar[msg] angelegt<br>";
+//} else {
+    //echo "Fehler $retar[errno]: $retar[msg]<br>";
+//}
 
 echo "</body></html>";

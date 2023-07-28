@@ -1,0 +1,30 @@
+{
+  "name": "felix-schnabel/mgvo-api_fork",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "fschn",
+      "email": "fschnabel007@gmail.com"
+    }
+  ],
+  "require": {
+    "squizlabs/php_codesniffer": "3.5.8",
+    "ext-openssl": "*",
+    "ext-mbstring": "*",
+    "ext-curl": "*",
+    "ext-simplexml": "*",
+    "friendsofphp/php-cs-fixer": "*",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "files": ["includes/ext_hlpfkt.php"],
+    "classmap": [
+      "includes/",
+      "ext_mod_hp.php",
+      "mgvo_sniplets.php",
+      "mgvo_generic_sniplets.php"
+    ]
+  }
+}
